@@ -20,7 +20,7 @@ public class MainController {
 		
 		System.out.println("Controller.main()");
 		
-		return "/WEB-INF/views/index.jsp";
+		return "main/index";
 		
 	}
 }
