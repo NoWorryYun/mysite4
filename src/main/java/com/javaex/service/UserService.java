@@ -31,4 +31,11 @@ public class UserService {
 
 		return count;
 	}
+	
+	public UserVo getUserInfo(int no) {
+		
+		UserVo userVo = (UserVo) userDao.getUserInfo(no);
+		
+		return userVo;
+	}
 }

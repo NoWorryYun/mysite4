@@ -2,9 +2,11 @@ package com.javaex.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
@@ -44,11 +46,21 @@ public class UserController {
 		return "user/loginForm";
 	}
 	
-	@RequestMapping(value="/update", method= {RequestMethod.GET, RequestMethod.POST})
-	public String modifyForm() {
+	@RequestMapping(value="/updateForm", method= {RequestMethod.GET, RequestMethod.POST})
+	public String modifyForm(Model model, @RequestParam("no") int no) {
 		System.out.println("UserController.modifyForm()");
+
+		UserVo userVo = userService.getUserInfo(no);
+		System.out.println(userVo);
+		model.addAttribute("userVo", userVo);
 		
 		return "user/modifyForm";
 	}
-	
+	@RequestMapping(value="/update", method= {RequestMethod.GET, RequestMethod.POST})
+	public String modify(@ModelAttribute UserVo userVo) {
+		
+		userService.modify(userVo);
+		
+		return"redirect:main";
+	}
 }

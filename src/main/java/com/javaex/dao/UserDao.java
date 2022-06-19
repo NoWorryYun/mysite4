@@ -32,4 +32,13 @@ public class UserDao {
 		
 		return count;
 	}
+	
+	public UserVo getUserInfo(int no) {
+		
+		UserVo userVo = sqlSession.selectOne("users.getUserInfo", no);
+		
+		return userVo;
+		
+	}
+	
 }

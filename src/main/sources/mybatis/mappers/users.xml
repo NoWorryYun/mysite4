@@ -3,20 +3,41 @@
 
 <mapper namespace="users">
 
+	<resultMap id="resultMapUserVo" type="UserVo">
+		<result column="no" property="no" />
+		<result column="id" property="id" />
+		<result column="password" property="password" />
+		<result column="name" property="name" />
+		<result column="gender" property="gender" />
+	</resultMap>
+
 	<insert id="join" parameterType="UserVo">
-	<![CDATA[
-		insert into users
-		values(seq_users_no.nextval, #{id}, #{password}, #{name}, #{gender})
-	]]>
+		<![CDATA[
+			insert into users
+			values(seq_users_no.nextval, #{id}, #{password}, #{name}, #{gender})
+		]]>
 	</insert>
-	
+
 	<update id="modify" parameterType="UserVo">
 		<![CDATA[
 			update users
-			set password,
-				name,
-				gender
+			set password = #{password},
+				name = #{name},
+				gender =#{gender}
 			where no = #{no}
 		]]>
 	</update>
+
+	<select id="getUserInfo" parameterType="int" resultMap="resultMapUserVo">
+		<![CDATA[
+			select  no,
+					id,
+					password,
+					name,
+					gender
+			from users
+			where no = #{no}
+		]]>
+	</select>
+
 </mapper>
