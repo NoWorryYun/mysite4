@@ -6,8 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="../../assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="../../assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="/mysite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="/mysite4/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -47,7 +47,7 @@
 				<!-- //content-head -->
 
 				<div id="guestbook">
-					<form action="addlist" method="get">
+					<form action="/mysite4/add" method="get">
 						<table id="guestAdd">
 							<colgroup>
 								<col style="width: 70px;">
@@ -60,7 +60,7 @@
 									<th><label class="form-text" for="input-uname">이름</label></th>
 									<td><input id="input-uname" type="text" name="name"></td>
 									<th><label class="form-text" for="input-pass">패스워드</label></th>
-									<td><input id="input-pass"type="password" name="pass"></td>
+									<td><input id="input-pass"type="password" name="password"></td>
 								</tr>
 								<tr>
 									<td colspan="4"><textarea name="content" cols="72" rows="5"></textarea></td>
@@ -72,7 +72,6 @@
 							
 						</table>
 						<!-- //guestWrite -->
-						<input type="hidden" name="action" value="add">
 						
 					</form>	
 					<c:forEach items="${guestList}" var="guestVo">
@@ -84,10 +83,10 @@
 							<col style="width: 10%;">
 						</colgroup>
 						<tr>
-							<td>${guestbookVo.no}</td>
-							<td>${guestbookVo.name}</td>
-							<td>${guestbookVo.regDate}</td>
-							<td><a href="./deleteForm?no=${guestbookVo.no}">삭제</a></td>
+							<td>${guestVo.no}</td>
+							<td>${guestVo.name}</td>
+							<td>${guestVo.regDate}</td>
+							<td><a href="./deleteForm?no=${guestVo.no}">삭제</a></td>
 						</tr>
 						<tr>
 							<td colspan=4 class="text-left">${guestVo.content}</td>

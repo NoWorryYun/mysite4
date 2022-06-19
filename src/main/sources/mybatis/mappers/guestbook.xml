@@ -18,11 +18,11 @@
 			        password,
 			        content,
 			        reg_date
-			from guestbook;
+			from guestbook
 		]]>
 	</select>
 	
-	<insert id="">
+	<insert id="add" parameterType="GuestVo">
 		<![CDATA[
 			insert into guestbook
 			values(seq_guestbook_no.nextval, #{name}, #{password}, #{content}, sysdate)
@@ -33,8 +33,14 @@
 		<![CDATA[
 			select password
 			from guestbook
-			where no = ${no}
+			where no = #{no}
 		]]>
 	</select>
 	
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete from guestbook
+			where no = #{no}
+		]]>
+	</delete>
 </mapper>
