@@ -12,7 +12,7 @@
 			</ul>
 			-->
 		<ul>
-			<li><a href="/mysite4/login" class="btn_s">로그인</a></li>
+			<li><a href="/mysite4/loginform" class="btn_s">로그인</a></li>
 			<li><a href="/mysite4/join" class="btn_s">회원가입</a></li>
 		</ul>
 
