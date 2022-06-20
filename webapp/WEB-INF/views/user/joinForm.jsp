@@ -48,7 +48,7 @@
 	
 				<div id="user">
 					<div id="joinForm">
-						<form action="/mysite4/user/joinCheck" method="get">
+						<form action="joinCheck" method="get">
 	
 							<!-- 아이디 -->
 							<div class="form-group">

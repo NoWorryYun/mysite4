@@ -1,5 +1,7 @@
 package com.javaex.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,7 @@ public class UserController {
 
 		userService.join(userVo);
 		
+		System.out.println(userVo);
 		return "user/joinOk";
 	}
 	
@@ -51,16 +54,25 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST})
-	public String login(@ModelAttribute UserVo userVo) {
+	public String login(@ModelAttribute UserVo userVo , HttpSession session) {
 		System.out.println("UserController.login()");
 		
 		UserVo authUser = userService.login(userVo);
+		if(authUser!=null) {
+		session.setAttribute("authUser", authUser);
+		return "redirect:main";
+		} else {
+			return "redirect:loginform?result=fail";
+		}
+	}
+	
+	@RequestMapping(value="/logout", method= {RequestMethod.GET, RequestMethod.POST})
+	public String logout(HttpSession session) {
 		
-		
+		session.removeAttribute("authUser");
 		
 		return "redirect:main";
 	}
-	
 	
 	@RequestMapping(value="/updateForm", method= {RequestMethod.GET, RequestMethod.POST})
 	public String modifyForm(Model model, @RequestParam("no") int no) {
