@@ -41,4 +41,10 @@ public class UserDao {
 		
 	}
 	
+	public UserVo login(UserVo userVo) {
+		
+		return sqlSession.selectOne("users.login", userVo);
+		
+	}
+	
 }

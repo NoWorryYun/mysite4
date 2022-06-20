@@ -47,7 +47,7 @@
 	
 				<div id="user">
 					<div id="loginForm">
-						<form action="/mysite4/login" method="get">
+						<form action="login" method="get">
 	
 							<!-- 아이디 -->
 							<div class="form-group">

@@ -38,4 +38,10 @@ public class UserService {
 		
 		return userVo;
 	}
+	
+	public UserVo login(UserVo userVo) {
+		
+		return userDao.login(userVo);
+		
+	}
 }
