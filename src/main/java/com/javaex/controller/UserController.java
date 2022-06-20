@@ -85,9 +85,15 @@ public class UserController {
 		return "user/modifyForm";
 	}
 	@RequestMapping(value="/update", method= {RequestMethod.GET, RequestMethod.POST})
-	public String modify(@ModelAttribute UserVo userVo) {
+	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		int no = authUser.getNo();
 		
 		userService.modify(userVo);
+		
+		UserVo getUserInfo = (UserVo) userService.getUserInfo(no);
+		
+		session.setAttribute("authUser", getUserInfo);
 		
 		return"redirect:main";
 	}

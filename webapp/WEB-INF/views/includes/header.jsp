@@ -9,7 +9,7 @@
 				<ul>
 					<li>${authUser.name} 님 안녕하세요^^</li>
 					<li><a href="/mysite4/logout" class="btn_s">로그아웃</a></li>
-					<li><a href="/mysite4/updateForm" class="btn_s">회원정보수정</a></li>
+					<li><a href="/mysite4/updateForm?no=${authUser.no}" class="btn_s">회원정보수정</a></li>
 				</ul>
 			</c:when>
 			<c:otherwise>
