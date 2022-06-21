@@ -122,4 +122,8 @@
 
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> branch 'master' of https://github.com/NoWorryYun/mysite4.git
