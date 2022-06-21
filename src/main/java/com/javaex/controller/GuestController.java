@@ -13,6 +13,7 @@ import com.javaex.service.GuestService;
 import com.javaex.vo.GuestVo;
 
 @Controller
+@RequestMapping(value="/guest")
 public class GuestController {
 
 	//필드

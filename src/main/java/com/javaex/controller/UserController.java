@@ -15,6 +15,7 @@ import com.javaex.vo.UserVo;
 
 
 @Controller
+@RequestMapping(value="/user")
 public class UserController {
 
 	//필드
@@ -59,9 +60,9 @@ public class UserController {
 		UserVo authUser = userService.login(userVo);
 		if(authUser!=null) {
 		session.setAttribute("authUser", authUser);
-		return "redirect:main";
+		return "redirect:/main";
 		} else {
-			return "redirect:loginform?result=fail";
+			return "redirect:/loginform?result=fail";
 		}
 	}
 	
@@ -70,7 +71,7 @@ public class UserController {
 		
 		session.removeAttribute("authUser");
 		
-		return "redirect:main";
+		return "redirect:/main";
 	}
 	
 	@RequestMapping(value="/updateForm", method= {RequestMethod.GET, RequestMethod.POST})
@@ -94,6 +95,6 @@ public class UserController {
 		
 		session.setAttribute("authUser", getUserInfo);
 		
-		return"redirect:main";
+		return"redirect:/main";
 	}
 }

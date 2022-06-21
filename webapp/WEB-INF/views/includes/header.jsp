@@ -8,14 +8,14 @@
 			<c:when test="${sessionScope.authUser!=null}">
 				<ul>
 					<li>${authUser.name} 님 안녕하세요^^</li>
-					<li><a href="/mysite4/logout" class="btn_s">로그아웃</a></li>
-					<li><a href="/mysite4/updateForm?no=${authUser.no}" class="btn_s">회원정보수정</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/logout" class="btn_s">로그아웃</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/updateForm?no=${authUser.no}" class="btn_s">회원정보수정</a></li>
 				</ul>
 			</c:when>
 			<c:otherwise>
 				<ul>
-					<li><a href="/mysite4/loginform" class="btn_s">로그인</a></li>
-					<li><a href="/mysite4/join" class="btn_s">회원가입</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/loginform" class="btn_s">로그인</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/join" class="btn_s">회원가입</a></li>
 				</ul>
 			</c:otherwise>
 		</c:choose>
