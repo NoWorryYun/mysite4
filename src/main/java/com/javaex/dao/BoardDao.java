@@ -51,4 +51,9 @@ public class BoardDao {
 		
 		return sqlSession.update("board.modify", boardVo);
 	}
+	
+	public List<BoardVo> search(String key){
+		
+		return sqlSession.selectOne("board.search", key);
+	}
 }

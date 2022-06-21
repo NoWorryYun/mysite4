@@ -91,4 +91,13 @@ public class BoardController {
 		return "redirect:list";
 	}
 	
+	@RequestMapping(value="/search", method = {RequestMethod.GET, RequestMethod.POST})
+	public String search(@RequestParam("key") String key, Model model) {
+		
+		List<BoardVo> boardList = boardService.search(key);
+		
+		model.addAttribute("boardList", boardList);
+	
+		return "board/list";
+	}
 }

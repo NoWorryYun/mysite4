@@ -41,6 +41,22 @@
 		and b.no = #{no}
 		]]>
 	</select>
+	
+		<select id="search" parameterType="String" resultMap="resultMapBoardVo">
+		<![CDATA[
+		select  b.no no,
+		        b.title title,
+		        b.content content,
+		        b.hit hit,
+		        b.reg_date regDate,
+		        b.user_no userNo,
+		        u.name name 
+		from board b, users u 
+		where b.user_no = u.no 
+		and b.title like '%'||#{key}||'%'
+		order by b.no desc
+		]]>
+	</select>
 
 	<delete id="delete" parameterType="int">
 		<![CDATA[

@@ -44,10 +44,15 @@ public class BoardService {
 
 		return boardDao.hitcount(no);
 	}
-	
+
 	public int modify(BoardVo boardVo) {
-		
+
 		return boardDao.modify(boardVo);
+	}
+
+	public List<BoardVo> search(String key) {
+
+		return boardDao.search(key);
 	}
 
 }
