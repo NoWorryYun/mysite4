@@ -76,7 +76,9 @@
 									<td>${boardVo.name}</td>
 									<td>${boardVo.hit}</td>
 									<td>${boardVo.regDate}</td>
-									<td><a href="">[삭제]</a></td>
+									<c:if test="${sessionScope.authUser.no == boardVo.userNo}">
+									<td><a href="${pageContext.request.contextPath}/board/delete?no=${boardVo.no}">[삭제]</a></td>
+									</c:if>
 								</tr>
 							</c:forEach>
 							</tbody>
@@ -101,8 +103,9 @@
 							
 							<div class="clear"></div>
 						</div>
-						<a id="btn_write" href="">글쓰기</a>
-					
+						<c:if test="${authUser != null}">
+						<a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm?no=${authUser.no}">글쓰기</a>
+						</c:if>
 					</div>
 					<!-- //list -->
 				</div>

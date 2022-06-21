@@ -2,9 +2,12 @@ package com.javaex.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +39,8 @@ public class BoardController {
 	@RequestMapping(value="/read", method= {RequestMethod.GET, RequestMethod.POST})
 	public String readBoard(Model model, @RequestParam("no") int no) {
 
+		boardService.hitcount(no);
+		
 		BoardVo readBoard = boardService.readBoard(no);
 		
 		model.addAttribute("boardVo", readBoard);
@@ -43,6 +48,47 @@ public class BoardController {
 		return "board/read";
 	}
 	
+	@RequestMapping(value="/delete", method = {RequestMethod.GET, RequestMethod.POST})
+	public String delete(@RequestParam("no") int no, HttpSession session) {
+		
+		System.out.println(session);
+		
+		boardService.delete(no);
+		
+		return "redirect:list";
+		
+	}
 	
+	@RequestMapping(value="/writeForm", method= {RequestMethod.GET, RequestMethod.POST})
+	public String writeForm() {
+		
+		return "board/writeForm";
+		
+	}
+	@RequestMapping(value="/write", method = {RequestMethod.GET, RequestMethod.POST})
+	public String write(@ModelAttribute BoardVo boardVo) {
+		
+		boardService.write(boardVo);
+		
+		return "redirect:list";
+		
+	}
+	@RequestMapping(value="/modifyForm", method = {RequestMethod.GET, RequestMethod.POST})
+	public String modifyForm(Model model, @RequestParam("no") int no) {
+
+		BoardVo boardVo = boardService.readBoard(no);
+		
+		model.addAttribute("boardVo", boardVo);
+		
+		return "board/modifyForm";
+	}
+	
+	@RequestMapping(value="/modify", method = {RequestMethod.GET, RequestMethod.POST})
+	public String modify(@ModelAttribute BoardVo boardVo) {
+		
+		boardService.modify(boardVo);
+		
+		return "redirect:list";
+	}
 	
 }

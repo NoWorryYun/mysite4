@@ -14,6 +14,13 @@ public class BoardVo {
 	//생성자
 	public BoardVo() {}
 	
+	public BoardVo(int no, String title, String content) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.content = content;
+	}
+
 	public BoardVo(int no, String title, String content, String hit, String regDate, String userNo) {
 		super();
 		this.no = no;

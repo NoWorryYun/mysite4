@@ -11,22 +11,43 @@ import com.javaex.vo.BoardVo;
 @Service
 public class BoardService {
 
-	//필드
+	// 필드
 	@Autowired
 	private BoardDao boardDao;
-	//생성자
-	
-	//GS
-	
-	//일반
-	public List<BoardVo> boardList(){
-		
+	// 생성자
+
+	// GS
+
+	// 일반
+	public List<BoardVo> boardList() {
+
 		return boardDao.boardList();
 	}
-	
+
 	public BoardVo readBoard(int no) {
-		
+
 		return boardDao.readBoard(no);
 	}
+
+	public int delete(int no) {
+
+		return boardDao.delete(no);
+
+	}
+
+	public int write(BoardVo boardVo) {
+
+		return boardDao.write(boardVo);
+	}
+
+	public int hitcount(int no) {
+
+		return boardDao.hitcount(no);
+	}
 	
+	public int modify(BoardVo boardVo) {
+		
+		return boardDao.modify(boardVo);
+	}
+
 }

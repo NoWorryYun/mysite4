@@ -42,5 +42,36 @@
 		]]>
 	</select>
 
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete from board
+			where no = #{no}
+		]]>
+	</delete>
+	
+	<insert id="write" parameterType="BoardVo">
+		 <![CDATA[
+		 	insert into board
+		 	values(seq_board_no.nextval, #{title}, #{content}, 0, sysdate, #{userNo})
+		 ]]>
+	</insert>
+	
+	<update id="hitcount" parameterType="int">
+		<![CDATA[
+			update board
+			set hit = hit+1
+			where no = #{no}
+		]]>
+	</update>
+	
+	<update id="modify" parameterType="BoardVo">
+		<![CDATA[
+			update board
+			set content =#{content},
+				title = #{title}
+			where no = #{no}
+		]]>
+	</update>
+	
 </mapper>
 
