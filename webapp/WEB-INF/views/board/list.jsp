@@ -1,12 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css"
+	rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css"
+	rel="stylesheet" type="text/css">
 
 </head>
 
@@ -22,7 +25,7 @@
 		<!-- nav -->
 		<c:import url="/WEB-INF/views/includes/navigation.jsp"></c:import>
 		<!-- //nav -->
-	
+
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -48,7 +51,7 @@
 					<div class="clear"></div>
 				</div>
 				<!-- //content-head -->
-	
+
 				<div id="board">
 					<div id="list">
 						<form action="search" method="get">
@@ -57,7 +60,7 @@
 								<button type="submit" id=btn_search>검색</button>
 							</div>
 						</form>
-						<table >
+						<table>
 							<thead>
 								<tr>
 									<th>번호</th>
@@ -69,21 +72,23 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach items="${boardList}" var="boardVo" varStatus="status">
-								<tr>
-									<td>${boardVo.no}</td>
-									<td class="text-left"><a href="${pageContext.request.contextPath}/board/read?no=${boardVo.no}">${boardVo.title}</a></td>
-									<td>${boardVo.name}</td>
-									<td>${boardVo.hit}</td>
-									<td>${boardVo.regDate}</td>
-									<c:if test="${sessionScope.authUser.no == boardVo.userNo}">
-									<td><a href="${pageContext.request.contextPath}/board/delete?no=${boardVo.no}">[삭제]</a></td>
-									</c:if>
-								</tr>
-							</c:forEach>
+								<c:forEach items="${boardList}" var="boardVo" varStatus="status">
+									<tr>
+										<td>${boardVo.no}</td>
+										<td class="text-left"><a
+											href="${pageContext.request.contextPath}/board/read?no=${boardVo.no}">${boardVo.title}</a></td>
+										<td>${boardVo.name}</td>
+										<td>${boardVo.hit}</td>
+										<td>${boardVo.regDate}</td>
+										<c:if test="${sessionScope.authUser.no == boardVo.userNo}">
+											<td><a
+												href="${pageContext.request.contextPath}/board/delete?no=${boardVo.no}">[삭제]</a></td>
+										</c:if>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
-			
+
 						<div id="paging">
 							<ul>
 								<li><a href="">◀</a></li>
@@ -99,12 +104,13 @@
 								<li><a href="">10</a></li>
 								<li><a href="">▶</a></li>
 							</ul>
-							
-							
+
+
 							<div class="clear"></div>
 						</div>
 						<c:if test="${authUser != null}">
-						<a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm?no=${authUser.no}">글쓰기</a>
+							<a id="btn_write"
+								href="${pageContext.request.contextPath}/board/writeForm?no=${authUser.no}">글쓰기</a>
 						</c:if>
 					</div>
 					<!-- //list -->
@@ -115,7 +121,7 @@
 
 		</div>
 		<!-- //container  -->
-		
+
 
 		<!-- footer -->
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
@@ -125,8 +131,4 @@
 
 </body>
 
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> branch 'master' of https://github.com/NoWorryYun/mysite4.git
