@@ -54,6 +54,6 @@ public class BoardDao {
 	
 	public List<BoardVo> search(String key){
 		
-		return sqlSession.selectOne("board.search", key);
+		return sqlSession.selectList("board.search", key);
 	}
 }
