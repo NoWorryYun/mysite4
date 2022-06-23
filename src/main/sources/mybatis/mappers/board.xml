@@ -89,5 +89,26 @@
 		]]>
 	</update>
 	
+		<select id="boardList2" parameterType="String" resultMap="resultMapBoardVo">
+		<![CDATA[
+			select  b.no no,
+		        b.title title,
+		        b.content content,
+		        b.hit hit,
+		        b.reg_date regDate,
+		        b.user_no userNo,
+		        u.name name 
+		from board b, users u 
+		where b.user_no = u.no ]]>
+
+		<if test="value != ''">
+		and b.title like '%'||#{key}||'%'
+		</if>
+
+		<![CDATA[
+		order by b.no desc
+		]]>
+	</select>
+	
 </mapper>
 

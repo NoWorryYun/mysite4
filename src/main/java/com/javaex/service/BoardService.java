@@ -55,4 +55,9 @@ public class BoardService {
 		return boardDao.search(key);
 	}
 
+	public List<BoardVo> boardList2(String key) {
+
+		return boardDao.boardList2(key);
+	}
+
 }

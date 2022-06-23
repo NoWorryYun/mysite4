@@ -56,4 +56,10 @@ public class BoardDao {
 		
 		return sqlSession.selectList("board.search", key);
 	}
+	
+	public List<BoardVo> boardList2(String key) {
+
+		return sqlSession.selectList("board.boardList2", key);
+	}
+
 }
