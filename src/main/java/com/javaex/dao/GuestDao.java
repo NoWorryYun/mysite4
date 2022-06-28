@@ -43,11 +43,8 @@ public class GuestDao {
 	
 	public int insertGuest(GuestVo guestVo) {
 		
-		System.out.println("쿼리문 전 >>" + guestVo);	//no 값 x
-		
 		int count = sqlSession.insert("guestbook.insertSelectKey", guestVo);
 		
-		System.out.println("쿼리문 후 >>" + guestVo);
 		return count;
 		
 		//no 값 o
@@ -58,6 +55,6 @@ public class GuestDao {
 		
 		GuestVo guestVo = sqlSession.selectOne("guestbook.getGuest", no);
 		
-		return null;
+		return guestVo;
 	}
 }

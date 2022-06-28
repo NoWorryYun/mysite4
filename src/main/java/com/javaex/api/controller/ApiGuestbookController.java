@@ -36,14 +36,17 @@ public class ApiGuestbookController {
 		List<GuestVo> guestList = guestService.addlist();
 		return guestList;
 	}
+	
+	//방명록 저장
 	@ResponseBody
 	@RequestMapping(value="/api/guestbook/add", method = {RequestMethod.GET, RequestMethod.POST})
-	public String add(@ModelAttribute GuestVo guestVo) {
+	public GuestVo add(@ModelAttribute GuestVo guestVo) {
 		System.out.println("apiContrller > add()");
 		
-		guestService.insertGuest(guestVo);
+		GuestVo gVo = guestService.insertGuest(guestVo);
 		
-		System.out.println(guestVo);
-		return "";
+		System.out.println(gVo);
+		
+		return gVo;
 	}
 }
