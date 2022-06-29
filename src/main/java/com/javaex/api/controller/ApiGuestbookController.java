@@ -49,4 +49,14 @@ public class ApiGuestbookController {
 		
 		return gVo;
 	}
+	/*
+	@ResponseBody
+	@RequestMapping(value="/api/guestbook/delete", method = {RequestMethod.GET, RequestMethod.POST})
+	public String delete(@ModelAttribute GuestVo guestVo) {
+		
+		
+		
+		return "";
+	}
+	*/
 }
