@@ -63,7 +63,7 @@ public class ApiGuestbookController {
 		return state;
 	}
 	
-	//방명록 저장
+	//방명록 저장2
 	@ResponseBody
 	@RequestMapping(value="/api/guestbook/add2", method = {RequestMethod.GET, RequestMethod.POST})
 	public GuestVo add2(@RequestBody GuestVo guestVo) {
