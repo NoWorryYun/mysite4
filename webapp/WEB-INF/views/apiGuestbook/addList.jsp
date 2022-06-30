@@ -87,7 +87,7 @@
 
 					</table>
 
-<!-- 					<button id="btnTest" class="btn btn-primary">모달창</button> -->
+					<!-- 					<button id="btnTest" class="btn btn-primary">모달창</button> -->
 
 
 
@@ -147,13 +147,13 @@
 					<h4 class="modal-title">비밀번호를 입력하세요</h4>
 				</div>
 				<div class="modal-body"></div>
-				
-					비밀번호<input type="text" name="password" value="">
-					<input type="hidden" name="no" value="">
-				
+
+				비밀번호<input type="text" name="password" value=""> <input
+					type="hidden" name="no" value="">
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-primary">확인</button>
+					<button id="btnModalDel" type="button" class="btn btn-primary">삭제</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -174,53 +174,97 @@
 		fetchList();
 	});
 
-	//저장버튼을 클릭했을 때
-	$("#btnSubmit").on("click", function() {
-		console.log("저장버튼");
+// 	//저장버튼을 클릭했을 때
+// 	$("#btnSubmit").on("click", function() {
+// 		console.log("저장버튼");
 
-		//데이터 수집
-		var name = $("[name='name']").val();
-		var password = $("[name='password']").val();
-		var content = $("[name='content']").val();
+// 		//데이터 수집
+// 		var name = $("[name='name']").val();
+// 		var password = $("[name='password']").val();
+// 		var content = $("[name='content']").val();
 
-		var guestVo = {
-			name : name,
-			password : password,
-			content : content
-		}
-		console.log(guestVo);
+// 		var guestVo = {
+// 			name : name,
+// 			password : password,
+// 			content : content
+// 		}
+// 		console.log(guestVo);
 
-		//저장요청
+// 		//저장요청
 
-		$.ajax({
+// 		$.ajax({
 
-			//url : "${pageContext.request.contextPath }/api/guestbook/add?name=" + name + "&password=" + password + "&content=" + content,		
-			url : "${pageContext.request.contextPath }/api/guestbook/add",
-			type : "post",
-			//contentType : "application/json",
-			data : guestVo,
+// 			//url : "${pageContext.request.contextPath }/api/guestbook/add?name=" + name + "&password=" + password + "&content=" + content,		
+// 			url : "${pageContext.request.contextPath }/api/guestbook/add",
+// 			type : "post",
+// 			//contentType : "application/json",
+// 			data : guestVo,
 
-			dataType : "json",
-			success : function(gVo) {
-				/*성공시 처리해야될 코드 작성*/
+// 			dataType : "json",
+// 			success : function(gVo) {
+// 				/*성공시 처리해야될 코드 작성*/
 
-				/* 1개데이터 리스트 추가(그리기)하기 */
-				render(gVo, "up");
+// 				/* 1개데이터 리스트 추가(그리기)하기 */
+// 				render(gVo, "up");
 
-				/* 입력폼 초기화 */
-				$("[name='name']").val("");
-				$("[name='password']").val("");
-				$("[name='content']").val("");
-			},
-			error : function(XHR, status, error) {
-				console.error(status + " : " + error);
-			}
-		});
+// 				/* 입력폼 초기화 */
+// 				$("[name='name']").val("");
+// 				$("[name='password']").val("");
+// 				$("[name='content']").val("");
+// 			},
+// 			error : function(XHR, status, error) {
+// 				console.error(status + " : " + error);
+// 			}
+// 		});
 
-		//응답을 데이타로 받으려고
+// 		//응답을 데이타로 받으려고
 
-	});
+// 	});
+//저장버튼을 클릭했을 때 (jquery요청 / 파라미터)
+	 	$("#btnSubmit").on("click", function() {
+	 		console.log("저장버튼");
 
+	 		//데이터 수집
+	 		var name = $("[name='name']").val();
+	 		var password = $("[name='password']").val();
+	 		var content = $("[name='content']").val();
+
+	 		var guestVo = {
+	 			name : name,
+	 			password : password,
+	 			content : content
+	 		}
+	 		console.log(guestVo);
+
+	 		//저장요청
+
+	 		$.ajax({
+
+	 			url : "${pageContext.request.contextPath}/api/guestbook/add2",
+	 			type : "post",
+	 			contentType : "application/json",
+	 			data : JSON.stringify(guestVo),		//js객체를 JSON문자열로 변경
+
+	 			dataType : "json",
+	 			success : function(gVo) {
+	 				/*성공시 처리해야될 코드 작성*/
+
+	 				/* 1개데이터 리스트 추가(그리기)하기 */
+	 				render(gVo, "up");
+
+	 				/* 입력폼 초기화 */
+	 				$("[name='name']").val("");
+	 				$("[name='password']").val("");
+	 				$("[name='content']").val("");
+	 			},
+	 			error : function(XHR, status, error) {
+	 				console.error(status + " : " + error);
+	 			}
+	 		});
+
+	 		//응답을 데이타로 받으려고
+
+	 	});
 	/*
 	
 	//테스트 버튼을 눌렀을 때
@@ -229,25 +273,75 @@
 		$("#delModal").modal("show");
 	});
 	
-	*/
-	
-	//리스트 삭제
-	$("#listArea").on("click", ".btnDel", function(){
-		
+	 */
+
+	//리스트의 삭제버튼 클릭할 때
+	$("#listArea").on("click", ".btnDel", function() {
+		console.log("리스트 삭제버튼 클릭");
 		var $this = $(this);
 		console.log($this);
-		
+
 		var no = $this.data("no");
 		console.log(no);
-		
-		
+
 		//모달창에 form no데이타 넣기
-		$("[name='password']").val("");
+		$("#delModal [name='password']").val("");
 		$("[name='no']").val(no);
-		
+
 		//모달창 띄우기
 		$("#delModal").modal("show");
-		
+
+	});
+
+	//모달창에 삭제버튼 클릭할때
+	$("#btnModalDel").on("click", function() {
+		console.log("모달창 삭제버튼 클릭");
+
+		//데이터 모으기
+		var password = $("#delModal [name='password']").val();
+		var no = $("#delModal [name='no']").val();
+		/*		
+		var guestVo = {};
+		guestVo.password = password;
+		guestVo.no = no;
+		 */
+
+		var guestVo = {
+			password : password,
+			no : no
+		};
+		console.log(guestVo);
+
+		//서버로 전송
+		$.ajax({
+
+			url : "${pageContext.request.contextPath }/api/guestbook/remove",
+			type : "post",
+			//contentType : "application/json",
+			data : guestVo,
+
+			dataType : "json",
+			success : function(result) {
+				/*성공시 처리해야될 코드 작성*/
+				console.log(result);
+
+				//성공
+				if (result == "success") {
+					$("#t" + no).remove();
+					$("#delModal").modal("hide");
+				} else {
+					alert("비밀번호를 확인하세요");
+				}
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+
+		//패스워드 맞을 때 리스트에서 제거하기
+
+		//모달창 닫기
+
 	});
 
 	//리스트 요청
@@ -272,19 +366,8 @@
 
 		});
 	};
-	
-	function delList(){
-		$.ajax({
-			
-			url : "${pageContext.request.contextPath}/api/guestbook/delete",
-			type : "post",
-			
-			data : guestVo,
-			dataType : "json"
-			
-		})
-	};
-	
+
+
 	//리스트 그리기 1개씩
 	function render(guestVo, opt) {
 
@@ -292,7 +375,7 @@
 
 		var str = "";
 
-		str += '<table class="guestRead">';
+		str += '<table id="t'+ guestVo.no +'" class="guestRead">';
 		str += "<colgroup>";
 		str += '<col style="width: 10%;">';
 		str += '<col style="width: 40%;">';

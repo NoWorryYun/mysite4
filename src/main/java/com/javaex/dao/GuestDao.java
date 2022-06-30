@@ -57,4 +57,13 @@ public class GuestDao {
 		
 		return guestVo;
 	}
+	
+	public int guestDelete(GuestVo guestVo) {
+		System.out.println("Dao > guestDelete");
+		
+		System.out.println(guestVo);
+		
+		int count = sqlSession.delete("guestbook.guestDelete", guestVo);
+		return count;
+	}
 }

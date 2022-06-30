@@ -51,4 +51,18 @@ public class GuestService {
 	
 		return gVo;
 	}
+	
+	public String removeGuest(GuestVo guestVo) {
+
+		String state;
+		
+		int count = guestDao.guestDelete(guestVo);
+		
+		if(count>0) {
+			state = "success";
+		} else {
+			state = "fail";
+		}
+		return state;
+	}
 }

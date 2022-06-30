@@ -66,4 +66,13 @@
          where no = #{no}
       ]]>
 	</select>
+	
+	<delete id="guestDelete" parameterType="GuestVo">
+		<![CDATA[
+			delete guestbook
+			where no = #{no}
+			and password = #{password}
+		]]>
+	</delete>
+	
 </mapper>
