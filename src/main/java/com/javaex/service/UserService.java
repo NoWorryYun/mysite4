@@ -44,4 +44,20 @@ public class UserService {
 		return userDao.login(userVo);
 		
 	}
+	
+	public String idCheck(String id) {
+		
+		String state;
+		
+		int count = userDao.idCheck(id);
+		
+		if(count > 0) {
+			state = "success";
+		} else {
+			state = "fail";
+		}
+		
+		return state;
+		
+	}
 }

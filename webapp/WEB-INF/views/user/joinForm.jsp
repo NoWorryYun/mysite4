@@ -5,9 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- bootStrap CSS -->
+<link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
 
+<!-- js -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
+<!-- bootstrap -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
 </head>
 
 <body>
@@ -48,13 +54,13 @@
 	
 				<div id="user">
 					<div id="joinForm">
-						<form action="joinCheck" method="get">
+						<form id="join-Form" action="joinCheck" method="get">
 	
 							<!-- 아이디 -->
 							<div class="form-group">
 								<label class="form-text" for="input-uid">아이디</label> 
 								<input type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
-								<button type="button" id="">중복체크</button>
+								<button type="button" id="btnMultiCheck">중복체크</button>
 							</div>
 	
 							<!-- 비밀번호 -->
@@ -109,6 +115,63 @@
 	</div>
 	<!-- //wrap -->
 
-</body>
+	<div id="checkId" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">아이디 중복확인</h4>
+				</div>
+				<div class="modal-body"></div>
+					<input type="hidden" name="id" value="">
 
+				<div class="modal-footer">
+					<button id="check" type="button" class="btn btn-primary">확인</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+</body>
+<script type="text/javascript">
+
+$("#join-Form").on("submit", function(){
+	
+	var id = $("#input-uid").val();
+	var password = $("#input-password").val();
+	
+	if(id == "" || id == null){
+		alert("아이디를 입력해주세요");
+		return false;
+	}
+	
+	if(password == "" || password == null){
+		alert("비밀번호를 입력해주세요");
+		return false;
+	}
+
+	if(password.length < 8){
+		alert("비밀번호를 확인해주세요");
+		return false;
+	}
+
+	//약관동의
+	var agree = $("#chk-agree").is(":checked);
+	if(agree == false){
+		alert("약관동의를 체크해주세요");
+		return false;
+	}
+		
+		
+})
+
+
+
+</script>
 </html>
