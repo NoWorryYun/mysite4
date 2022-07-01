@@ -49,14 +49,6 @@
 			and password = #{password}
 		]]>
 	</select>
-	
-		<select id="idCheck" parameterType="String" resultMap="String">
-		<![CDATA[
-			select  id
-			from users
-			where id = #{id}
-		]]>
-	</select>
 
 
 </mapper>

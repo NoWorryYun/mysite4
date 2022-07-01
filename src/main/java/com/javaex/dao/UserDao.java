@@ -46,10 +46,4 @@ public class UserDao {
 		return sqlSession.selectOne("users.login", userVo);
 		
 	}
-	
-	public int idCheck(String id) {
-		
-		return sqlSession.selectOne("users.idCheck", id);
-	}
-	
 }
