@@ -12,25 +12,25 @@
 		<result column="save_name" property="saveName" />
 		<result column="file_path" property="filePath" />
 		<result column="file_size" property="fileSize" />
- 	</resultMap>
- 	
-	
- 	<select id="galleryList" resultMap="resultMapGalleryVo">
+	</resultMap>
+
+
+	<select id="galleryList" resultMap="resultMapGalleryVo">
 		<![CDATA[
-			select g.no 
-				   , g.user_no 
-				   , g.content 
-				   , g.org_name 
-				   , g.save_name 
-				   , g.file_path 
-				   , g.file_size 
-				   , u.name 
+			select   g.no 
+				   , g.user_no userNo
+				   , g.content content
+				   , g.org_name orgName
+				   , g.save_name saveName
+				   , g.file_path filePath
+				   , g.file_size fileSize
+				   , u.name name
 		   from gallery g, users u
 		   where g.user_no = u.no
 		   order by g.no desc
 		]]>
 	</select>
-	
+
 	<insert id="insertGallery" parameterType="GalleryVo">
 		<![CDATA[
 			insert into gallery
@@ -44,5 +44,12 @@
 				   )
 		]]>
 	</insert>
+
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete gallery
+			where no = #{no}
+		]]>
+	</delete>
 
 </mapper>

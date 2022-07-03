@@ -58,9 +58,9 @@
 						
 						<!-- 이미지반복영역 -->
 						<c:forEach items="${gList}" var="galleryVo">
-							<li>
+							<li id="img${galleryVo.no}">
 								<div class="view" >
-									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${galleryVo.saveName}">
+									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${galleryVo.saveName}" data-no="${galleryVo.no}" data-src="${pageContext.request.contextPath}/upload/${galleryVo.saveName}" data-content="${galleryVo.content}" data-user="${galleryVo.userNo}">
 									<div class="imgWriter">작성자: <strong>${galleryVo.name}</strong></div>
 								</div>
 							</li>
@@ -136,11 +136,12 @@
 						<p id="viewModelContent"></p>
 					</div>
 					
+					<input id="galleryNo" type="hidden" name="no">
 				</div>
 				<form method="" action="">
 					<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
+<!-- 					<button type="button" class="btn btn-danger" id="btnDel">삭제</button> -->
 				</div>
 				
 				
@@ -149,16 +150,80 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->	
-
-
+<c:if test="${authUser != null}">
+<input id="authUserNo" type="hidden" value="${authUser.no}">
+</c:if>
 </body>
 
 <script type="text/javascript">
+var authUserNo = $("#authUserNo").val();
 
+var count = 0
 $("#btnImgUpload").on("click", function(){
 	$("#addModal").modal("show");
 })
 
+$("#viewArea").on("click", ".imgItem", function(){
+	console.log("이미지클릭");
+
+	var $this = $(this);
+	console.log($this);
+
+	var no = $this.data("no");
+	console.log(no);	
+
+	var content = $this.data("content");
+	console.log(content);
+
+	var src = $this.data("src");
+	console.log(src);
+	
+	var user = $this.data("user");
+	console.log(user);
+	
+	$('#viewModelImg').attr('src', src);
+	$("#viewModelContent").text(content);
+	$("#galleryNo").val(no);
+	$("#viewModal").modal("show");
+	
+	console.log(authUserNo);
+	console.log(user);
+	
+	if(authUserNo == user){;
+		if(count < 1){
+			$(".modal-footer").append('<button type="button" class="btn btn-danger" id="btnDel">삭제</button>');
+			console.log(count);
+			count += 1;
+		}
+	}
+})
+
+$(".modal-footer").on("click", "#btnDel", function(){
+	console.log("삭제버튼");
+	
+	var no = $("#viewModal [name='no']").val();
+	console.log(no);
+	
+	$.ajax({
+
+		url : "${pageContext.request.contextPath }/gallery/delete",
+		type : "post",
+		contentType : "application/json",
+		data : JSON.stringify(no),
+
+		dataType : "json",
+		success : function(result) {
+			/*성공시 처리해야될 코드 작성*/
+			if(result =="success"){
+			$("#img" + no).remove();
+			$("#viewModal").modal("hide");
+			}
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	});
+})
 
 </script>
 

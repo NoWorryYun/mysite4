@@ -81,4 +81,17 @@ public class GalleryService {
 		return saveName;
 	}
 	
+	public String deleteGallery(int no) {
+		String state;
+		
+		int count = galleryDao.deleteGallery(no);
+		
+		if (count>0) {
+			state="success";
+		} else {
+			state = "fail";
+		}
+		return state;
+	}
+	
 }
