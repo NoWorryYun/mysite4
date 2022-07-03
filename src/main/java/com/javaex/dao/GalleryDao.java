@@ -18,9 +18,9 @@ public class GalleryDao {
 		
 		System.out.println("gList > Dao");
 		
-		List<GalleryVo> gVo= sqlSession.selectList("gallery.galleryList");
-		System.out.println(gVo);
-		return gVo;
+		List<GalleryVo> gList= sqlSession.selectList("gallery.galleryList");
+		System.out.println(gList);
+		return gList;
 	}
 	
 	public int insertGallery(GalleryVo galleryVo) {

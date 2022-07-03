@@ -5,17 +5,17 @@ public class GalleryVo {
 	private int no;
 	private int userNo;
 	private String content;
-	private String filePath;
-	private String orgName;
 	private String saveName;
-	private int fileSize;
+	private String orgName;
+	private String filePath;
+	private long fileSize;
 	private String name;
 	// 생성자
 	public GalleryVo() {
 		super();
 	}
 
-	public GalleryVo(int userNo, String content, String filePath, String orgName, String saveName, int fileSize) {
+	public GalleryVo(int userNo, String content, String saveName, String orgName, String filePath, long fileSize) {
 		super();
 		this.userNo = userNo;
 		this.content = content;
@@ -25,8 +25,7 @@ public class GalleryVo {
 		this.fileSize = fileSize;
 	}
 
-	public GalleryVo(int no, int userNo, String content, String filePath, String orgName, String saveName,
-			int fileSize) {
+	public GalleryVo(int no, int userNo, String content, String saveName, String orgName, String filePath, long fileSize) {
 		super();
 		this.no = no;
 		this.userNo = userNo;
@@ -37,7 +36,7 @@ public class GalleryVo {
 		this.fileSize = fileSize;
 	}
 
-	public GalleryVo(int no, int userNo, String content, String filePath, String orgName, String saveName, int fileSize,
+	public GalleryVo(int no, int userNo, String content, String saveName, String orgName, String filePath, long fileSize,
 			String name) {
 		super();
 		this.no = no;
@@ -99,11 +98,11 @@ public class GalleryVo {
 		this.saveName = saveName;
 	}
 
-	public int getFileSize() {
+	public long getFileSize() {
 		return fileSize;
 	}
 
-	public void setFileSize(int fileSize) {
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
 

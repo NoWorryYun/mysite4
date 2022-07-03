@@ -48,20 +48,23 @@
 			<div id="gallery">
 				<div id="list">
 			
-					
+					<c:if test="${sessionScope.authUser != null}">
 						<button id="btnImgUpload">이미지올리기</button>
+					</c:if>
 						<div class="clear"></div>
 
 			
 					<ul id="viewArea">
 						
 						<!-- 이미지반복영역 -->
+						<c:forEach items="${gList}" var="galleryVo">
 							<li>
 								<div class="view" >
-									<img class="imgItem" src="">
-									<div class="imgWriter">작성자: <strong></strong></div>
+									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${galleryVo.saveName}">
+									<div class="imgWriter">작성자: <strong>${galleryVo.name}</strong></div>
 								</div>
 							</li>
+						</c:forEach>
 						<!-- 이미지반복영역 -->
 						
 						
@@ -91,15 +94,16 @@
 					<h4 class="modal-title">이미지등록</h4>
 				</div>
 				
-				<form method="get" action="${pageContext.request.contextPath }/gallery/upload" enctype="multipart/form-data">
+				<form method="post" action="${pageContext.request.contextPath}/gallery/upload" enctype="multipart/form-data">
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="form-text">글작성</label>
 							<input id="addModalContent" type="text" name="content" value="" >
+							<input type="hidden" name="userNo" value="${authUser.no}">
 						</div>
 						<div class="form-group">
 							<label class="form-text">이미지선택</label>
-							<input id="file" type="file" name="file" value="" >
+							<input id="file" type="file" name="file">
 						</div>
 					</div>
 					<div class="modal-footer">

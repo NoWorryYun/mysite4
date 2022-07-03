@@ -15,23 +15,23 @@
  	</resultMap>
  	
 	
-<!-- 	<select id="galleryList" resultType="com.javaex.vo.GalleryVo">
+ 	<select id="galleryList" resultMap="resultMapGalleryVo">
 		<![CDATA[
 			select g.no 
 				   , g.user_no 
 				   , g.content 
-				   , g.orgName 
-				   , g.saveName 
-				   , g.filePath 
-				   , g.fileSize 
+				   , g.org_name 
+				   , g.save_name 
+				   , g.file_path 
+				   , g.file_size 
 				   , u.name 
 		   from gallery g, users u
 		   where g.user_no = u.no
 		   order by g.no desc
 		]]>
-	</select> -->
+	</select>
 	
-	<insert id="insertGallery" parameterType="com.javaex.vo.GalleryVo">
+	<insert id="insertGallery" parameterType="GalleryVo">
 		<![CDATA[
 			insert into gallery
 			values(seq_gallery_no.nextval
