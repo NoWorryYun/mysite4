@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rBoard">
+
+	<resultMap id="resultMapRBoardVo" type="RBoardVo">
+		<result column="no" property="no" />
+		<result column="name" property="name" />
+		<result column="content" property="content" />
+		<result column="hit" property="hit" />
+		<result column="reg_date" property="regDate" />
+		<result column="user_no" property="userNo" />
+		<result column="order_no" property="orderNo" />
+		<result column="group_no" property="groupNo" />
+		<result column="depth" property="depth" />
+	</resultMap>
+
+	<!-- 리스트 -->
+	<select id="boardList" resultMap="resultMapRBoardVo">
+		<![CDATA[
+			select  b.no no,
+			        b.title title,
+			        b.content content,
+			        b.hit hit,
+			        b.reg_date regDate,
+			        b.user_no userNo,
+			        b.group_no groupNo,
+			        b.order_no orderNo,
+			        b.depth depth,
+			        u.name name
+			from rboard b, users u 
+			where b.user_no = u.no
+		]]>
+	</select>
+
+	<!-- 읽기 -->
+	<select id="readBoard" parameterType="int" resultMap="resultMapRBoardVo">
+		<![CDATA[
+		select  b.no no,
+		        b.title title,
+		        b.content content,
+		        b.hit hit,
+		        b.reg_date regDate,
+		        b.user_no userNo,
+		        b.group_no groupNo,
+		        b.order_no orderNo,
+		        b.depth depth,
+		        u.name name
+		from rboard b, users u 
+		where b.user_no = u.no 
+		and b.no = #{no}
+		]]>
+	</select>
+
+	<!-- 검색 -->
+	<select id="search" parameterType="String" resultMap="resultMapRBoardVo">
+		<![CDATA[
+		select  b.no no,
+		        b.title title,
+		        b.content content,
+		        b.hit hit,
+		        b.reg_date regDate,
+		        b.user_no userNo,
+		        b.group_no groupNo,
+		        b.order_no orderNo,
+		        b.depth depth,
+		        u.name name
+		from rboard b, users u 
+		where b.user_no = u.no 
+		and b.title like '%'||#{key}||'%'
+		order by b.no desc
+		]]>
+	</select>
+
+	<!-- Group, order, depth 불러오기 -->
+	<select id="getTrinity" parameterType="int" resultMap="resultMapRBoardVo">
+		<![CDATA[
+		select  group_no groupNo,
+		        order_no orderNo,
+		        depth depth
+		from rboard
+		where group_no = #{groupNo}
+		]]>
+	</select>
+	
+	<!-- 삭제 -->
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete from rboard
+			where no = #{no}
+		]]>
+	</delete>
+
+	<!-- 글쓰기(일반) -->
+	<insert id="writeBoard" parameterType="RBoardVo">
+		 <![CDATA[
+		 	insert into rboard
+		 	values(seq_board_no.nextval, #{userNo}, #{title}, #{content}, 0, sysdate, seq_board_no.nextval, 1, 0)
+		 ]]>
+	</insert>
+	<!-- 글쓰기(코멘트) -->
+	<insert id="writeComment" parameterType="RBoardVo">
+		 <![CDATA[
+		 	insert into rboard
+		 	values(seq_board_no.nextval, #{userNo}, #{title}, #{content}, 0, sysdate, #{groupNo}, #{orderNo}, #{depth})
+		 ]]>
+	</insert>
+
+	<!-- 조회수 + 1 -->
+	<update id="hitcount" parameterType="int">
+		<![CDATA[
+			update rboard
+			set hit = hit+1
+			where no = #{no}
+		]]>
+	</update>
+
+	<!-- order + 1 -->
+	<update id="ordercount" parameterType="int">
+		<![CDATA[
+			update rboard
+			set order_no = order_no+1
+			where group_no = #{groupNo}
+		]]>
+	</update>
+	
+	<!-- 들여쓰기 + 1 -->
+	<update id="depthcount" parameterType="int">
+		<![CDATA[
+			update rboard
+			set depthcount = depthcount+1
+			where group_no = #{groupNo}
+		]]>
+	</update>
+
+	<!-- 수정 -->
+	<update id="modify" parameterType="RBoardVo">
+		<![CDATA[
+			update rboard
+			set content =#{content},
+				title = #{title}
+			where no = #{no}
+		]]>
+	</update>
+
+	<!-- 리스트출력2 -->
+	<select id="boardList2" parameterType="String" resultMap="resultMapRBoardVo">
+		<![CDATA[
+			select  b.no no,
+			        b.title title,
+			        b.content content,
+			        b.hit hit,
+			        b.reg_date regDate,
+			        b.user_no userNo,
+			        u.name name,
+			        b.group_no groupNo,
+			        b.order_no orderNo,
+			        b.depth depth
+			from rboard b, users u 
+			where b.user_no = u.no 
+		]]>
+
+		<if test="value != ''">
+			and b.title like '%'||#{key}||'%'
+		</if>
+
+		<![CDATA[
+		order by b.no desc
+		]]>
+	</select>
+
+</mapper>
+
