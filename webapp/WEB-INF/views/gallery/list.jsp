@@ -195,6 +195,10 @@ $("#viewArea").on("click", ".imgItem", function(){
 			console.log(count);
 			count += 1;
 		}
+	} else if(authUserNo != user){
+		count = 0;
+		$("#btnDel").remove();
+		$("#btnDel").remove();
 	}
 })
 
