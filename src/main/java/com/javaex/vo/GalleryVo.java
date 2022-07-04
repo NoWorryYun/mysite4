@@ -5,9 +5,9 @@ public class GalleryVo {
 	private int no;
 	private int userNo;
 	private String content;
-	private String saveName;
-	private String orgName;
 	private String filePath;
+	private String orgName;
+	private String saveName;
 	private long fileSize;
 	private String name;
 	// 생성자
@@ -15,7 +15,7 @@ public class GalleryVo {
 		super();
 	}
 
-	public GalleryVo(int userNo, String content, String saveName, String orgName, String filePath, long fileSize) {
+	public GalleryVo(int userNo, String content, String filePath, String orgName, String saveName, long fileSize) {
 		super();
 		this.userNo = userNo;
 		this.content = content;
@@ -25,7 +25,7 @@ public class GalleryVo {
 		this.fileSize = fileSize;
 	}
 
-	public GalleryVo(int no, int userNo, String content, String saveName, String orgName, String filePath, long fileSize) {
+	public GalleryVo(int no, int userNo, String content, String filePath, String orgName, String saveName, long fileSize) {
 		super();
 		this.no = no;
 		this.userNo = userNo;
@@ -36,7 +36,7 @@ public class GalleryVo {
 		this.fileSize = fileSize;
 	}
 
-	public GalleryVo(int no, int userNo, String content, String saveName, String orgName, String filePath, long fileSize,
+	public GalleryVo(int no, int userNo, String content, String filePath, String orgName, String saveName, long fileSize,
 			String name) {
 		super();
 		this.no = no;

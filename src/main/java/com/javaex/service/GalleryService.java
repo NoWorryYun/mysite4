@@ -58,7 +58,7 @@ public class GalleryService {
 		long fileSize = file.getSize();
 		
 		//Vo로 묶기
-		GalleryVo galleryVo = new GalleryVo(userNo, content, saveName, orgName, filePath, fileSize);
+		GalleryVo galleryVo = new GalleryVo(userNo, content, filePath, orgName, saveName, fileSize);
 		System.out.println(galleryVo);
 		
 		// (1)Dao DB에 저장

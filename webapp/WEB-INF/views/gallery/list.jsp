@@ -139,7 +139,7 @@
 					<input id="galleryNo" type="hidden" name="no">
 				</div>
 				<form method="" action="">
-					<div class="modal-footer">
+					<div id ="btnDelModal"class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 <!-- 					<button type="button" class="btn btn-danger" id="btnDel">삭제</button> -->
 				</div>
@@ -191,11 +191,11 @@ $("#viewArea").on("click", ".imgItem", function(){
 	
 	if(authUserNo == user){;
 		if(count < 1){
-			$(".modal-footer").append('<button type="button" class="btn btn-danger" id="btnDel">삭제</button>');
+			$("#btnDelModal").append('<button type="button" class="btn btn-danger" id="btnDel">삭제</button>');
 			console.log(count);
 			count += 1;
 		}
-	} else if(authUserNo != user){
+	} else {
 		count = 0;
 		$("#btnDel").remove();
 		$("#btnDel").remove();
