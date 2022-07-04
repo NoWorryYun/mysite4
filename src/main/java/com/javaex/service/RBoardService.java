@@ -38,8 +38,15 @@ public class RBoardService {
 	
 	//코멘트 글쓰기
 	public int writeComment(RBoardVo rBoardVo) {
+
+		int count = rboardDao.writeComment(rBoardVo);
 		
-		return rboardDao.writeComment(rBoardVo);
+			//부모 제외 전체 order에 + 1
+			rboardDao.orderCount(rBoardVo);
+			//자신 order에 + 1
+			rboardDao.selfordercount(rBoardVo);
+			
+		return count;
 		
 	}
 	

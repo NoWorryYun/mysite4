@@ -27,13 +27,8 @@
 
 
 		<div id="container" class="clearfix">
-			<div id="aside">
-				<h2>게시판</h2>
-				<ul>
-					<li><a href="">일반게시판</a></li>
-					<li><a href="">댓글게시판</a></li>
-				</ul>
-			</div>
+			<!-- aside -->
+			<c:import url="/WEB-INF/views/includes/aside.jsp"></c:import>
 			<!-- //aside -->
 
 			<div id="content">
@@ -109,7 +104,7 @@
 						</div>
 						<c:if test="${authUser != null}">
 							<a id="btn_write"
-								href="${pageContext.request.contextPath}/rboard/writeForm?no=${authUser.no}">글쓰기</a>
+								href="${pageContext.request.contextPath}/rboard/writeForm">글쓰기</a>
 						</c:if>
 					</div>
 					<!-- //list -->

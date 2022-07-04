@@ -50,6 +50,23 @@ public class RBoardDao {
 		
 		return sqlsession.update("rBoard.hitcount", no);
 	}
+
+	//orderNo 올리기 (본인)
+	public int selfordercount(RBoardVo rBoardVo) {
+		
+		return sqlsession.update("rBoard.selfordercount", rBoardVo);
+		
+	}
 	
+	//orderNo 올리기 (본인 위)
+	public int orderCount(RBoardVo rBoardVo) {
+		
+		return sqlsession.update("rBoard.ordercount", rBoardVo);
+	}
 	
+	//depth 길이
+	public int depthcount(RBoardVo rBoardVo) {
+		
+		return sqlsession.update("rBoard.depthcount", rBoardVo);
+	}
 }

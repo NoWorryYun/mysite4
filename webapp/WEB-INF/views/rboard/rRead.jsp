@@ -26,13 +26,8 @@
 	
 
 		<div id="container" class="clearfix">
-			<div id="aside">
-				<h2>게시판</h2>
-				<ul>
-					<li><a href="">일반게시판</a></li>
-					<li><a href="">댓글게시판</a></li>
-				</ul>
-			</div>
+			<!-- aside -->
+			<c:import url="/WEB-INF/views/includes/aside.jsp"></c:import>
 			<!-- //aside -->
 
 			<div id="content">
@@ -83,14 +78,13 @@
 									${rBoardVo.content}
 								</span>
 							</div>
-							
 							<input type="text" name="groupNo" value="${rBoardVo.groupNo}">
 							<input type="text" name="orderNo" value="${rBoardVo.orderNo}">
 							<input type="text" name="depth" value="${rBoardVo.depth}">
 							<!-- 그룹/오더/들여쓰기 -->
 							
 							<c:if test="${authUser != null}">
-							<a id="btn_modify" href="${pageContext.request.contextPath}/rboard/replyForm?groupNo=${rBoardVo.groupNo}">답글</a>
+							<a id="btn_modify" href="${pageContext.request.contextPath}/rboard/replyForm?no=${rBoardVo.no}">답글</a>
 							</c:if>
 							<c:if test="${authUser.no == rBoardVo.userNo}">
 							<a id="btn_modify" href="${pageContext.request.contextPath}/rboard/modifyForm?no=${rBoardVo.no}">수정</a>

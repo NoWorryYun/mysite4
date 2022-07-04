@@ -23,26 +23,12 @@
 		<c:import url="/WEB-INF/views/includes/navigation.jsp"></c:import>
 		<!-- //nav -->
 	
-
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
-			</ul>
-		</div>
-		<!-- //nav -->
-
+		<!-- aside -->
+		<c:import url="/WEB-INF/views/includes/aside.jsp"></c:import>
+		<!-- //aside -->
 		<div id="container" class="clearfix">
-			<div id="aside">
-				<h2>게시판</h2>
-				<ul>
-					<li><a href="">일반게시판</a></li>
-					<li><a href="">댓글게시판</a></li>
-				</ul>
-			</div>
-			<!-- //aside -->
+			
+			
 
 			<div id="content">
 
@@ -67,14 +53,13 @@
 								<label class="form-text" for="txt-title">제목</label>
 								<input type="text" id="txt-title" name="title" value="" placeholder="제목을 입력해 주세요">
 							</div>
-						
 							<!-- 내용 -->
 							<div class="form-group">
 								<textarea id="txt-content" name="content"></textarea>
-								<c:if test="${param.groupNo != null}">
-								<input type="text" name="groupNo" value="${groupNo}">
-								<input type="text" name="orderNo" value="${orderNo}">
-								<input type="text" name="depth" value="${depth}">
+								<c:if test="${param.no != null}">
+									<input type="text" name="groupNo" value="${rBoardVo.groupNo}">
+									<input type="text" name="orderNo" value="${rBoardVo.orderNo}">
+									<input type="text" name="depth" value="${rBoardVo.depth}">
 								</c:if>
 							</div>
 							
@@ -94,7 +79,6 @@
 
 		</div>
 		<!-- //container  -->
-
 		<!-- footer -->
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- //footer -->

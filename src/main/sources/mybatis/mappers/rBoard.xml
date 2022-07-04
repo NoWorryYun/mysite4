@@ -30,6 +30,7 @@
 			        u.name name
 			from rboard b, users u 
 			where b.user_no = u.no
+			order by group_no DESC, order_no ASC
 		]]>
 	</select>
 
@@ -68,7 +69,7 @@
 		from rboard b, users u 
 		where b.user_no = u.no 
 		and b.title like '%'||#{key}||'%'
-		order by b.no desc
+		order by group_no DESC, order_no ASC
 		]]>
 	</select>
 
@@ -79,10 +80,10 @@
 		        order_no orderNo,
 		        depth depth
 		from rboard
-		where group_no = #{groupNo}
+		where no = #{no}
 		]]>
 	</select>
-	
+
 	<!-- 삭제 -->
 	<delete id="delete" parameterType="int">
 		<![CDATA[
@@ -95,14 +96,14 @@
 	<insert id="writeBoard" parameterType="RBoardVo">
 		 <![CDATA[
 		 	insert into rboard
-		 	values(seq_board_no.nextval, #{userNo}, #{title}, #{content}, 0, sysdate, seq_board_no.nextval, 1, 0)
+		 	values(seq_rboard_no.nextval, #{userNo}, #{title}, #{content}, 0, sysdate, seq_rboard_no.nextval, 1, 0)
 		 ]]>
 	</insert>
 	<!-- 글쓰기(코멘트) -->
 	<insert id="writeComment" parameterType="RBoardVo">
 		 <![CDATA[
 		 	insert into rboard
-		 	values(seq_board_no.nextval, #{userNo}, #{title}, #{content}, 0, sysdate, #{groupNo}, #{orderNo}, #{depth})
+		 	values(seq_rboard_no.nextval, #{userNo}, #{title}, #{content}, 0, sysdate, #{groupNo}, #{orderNo}, #{depth})
 		 ]]>
 	</insert>
 
@@ -115,17 +116,28 @@
 		]]>
 	</update>
 
-	<!-- order + 1 -->
-	<update id="ordercount" parameterType="int">
+	<!-- order + 1(본인) -->
+	<update id="selfordercount" parameterType="RBoardVo">
 		<![CDATA[
 			update rboard
-			set order_no = order_no+1
-			where group_no = #{groupNo}
+			set order_no = order_no + 1
+			where title = #{title}
+			and group_no = #{groupNo}
 		]]>
 	</update>
-	
+
+	<!-- order + 1(본인 이상 숫자) -->
+	<update id="ordercount" parameterType="RBoardVo">
+		<![CDATA[
+			update rboard
+			set order_no = order_no + 1
+			where group_no = #{groupNo}
+			and order_no > #{orderNo}
+		]]>
+	</update>
+
 	<!-- 들여쓰기 + 1 -->
-	<update id="depthcount" parameterType="int">
+	<update id="depthcount" parameterType="RBoardVo">
 		<![CDATA[
 			update rboard
 			set depthcount = depthcount+1
@@ -165,7 +177,7 @@
 		</if>
 
 		<![CDATA[
-		order by b.no desc
+		order by group_no DESC, order_no ASC
 		]]>
 	</select>
 

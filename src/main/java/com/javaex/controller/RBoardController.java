@@ -30,36 +30,9 @@ public class RBoardController {
 		return "rboard/rList";
 	}
 	
-	//쓰기폼(일반글쓰기)
-	@RequestMapping(value="/rboard/writeForm", method = {RequestMethod.GET, RequestMethod.POST})
-	public String rBoardWriteForm() {
-		
-		return "rboard/rWriteForm";
-	}
-	
-	//일반글등록
-	@RequestMapping(value="/rboard/write", method = {RequestMethod.GET, RequestMethod.POST})
-	public String rBoardWriteForm(@ModelAttribute RBoardVo rBoardVo) {
-		
-		rBoardService.writeBoard(rBoardVo);
-		
-		return "redirect:rList";
-	}
-	
-	//쓰기폼(댓글쓰기)
-	@RequestMapping(value="/rboard/replyForm", method = {RequestMethod.GET, RequestMethod.POST})
-	public String rBoardReply(Model model, @RequestParam("groupNo") int groupNo) {
-		
-		RBoardVo rBoardVo = rBoardService.getTrinity(groupNo);
-		
-		model.addAttribute("rBoardVo", rBoardVo);
-		
-		return "rboard/rWriteForm";
-	}
-	
 	//글읽기
 	@RequestMapping(value="/rboard/read", method = {RequestMethod.GET, RequestMethod.POST})
-	public String rBoardRead(int no, Model model) {
+	public String rBoardRead(@RequestParam("no") int no, Model model) {
 		
 		RBoardVo rBoardVo = rBoardService.readBoard(no);
 		
@@ -69,5 +42,49 @@ public class RBoardController {
 		
 	}
 	
+	//쓰기폼(일반글쓰기)
+	@RequestMapping(value="/rboard/writeForm", method = {RequestMethod.GET, RequestMethod.POST})
+	public String rBoardWriteForm() {
+		
+		return "rboard/rWriteForm";
+	}
+	
+	//글등록
+	@RequestMapping(value="/rboard/write", method = {RequestMethod.GET, RequestMethod.POST})
+	public String rBoardWriteForm(@ModelAttribute RBoardVo rBoardVo) {
+		
+		int groupNo = rBoardVo.getGroupNo();
+		
+		System.out.println(groupNo);
+		if(groupNo < 1) {
+			rBoardService.writeBoard(rBoardVo);
+			System.out.println("write");
+		} else {
+			rBoardService.writeComment(rBoardVo);
+			System.out.println(rBoardVo);
+			System.out.println("comment");
+		}
+		
+		
+		return "redirect:list";
+	}
+	
+	//쓰기폼(댓글쓰기)
+	@RequestMapping(value="/rboard/replyForm", method = {RequestMethod.GET, RequestMethod.POST})
+	public String rBoardReplyForm(Model model, @RequestParam("no") int no) {
+		
+		RBoardVo rBoardVo = rBoardService.getTrinity(no);
+		
+		model.addAttribute("rBoardVo", rBoardVo);
+		
+		return "rboard/rWriteForm";
+	}
+	
+	@RequestMapping(value="/rboard/reply", method = {RequestMethod.GET, RequestMethod.POST})
+	public String rBoardReply(@ModelAttribute RBoardVo rBoardVo) {
+		return "redirect:list";
+	}
+	
+
 	
 }
