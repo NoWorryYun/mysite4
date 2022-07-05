@@ -75,8 +75,7 @@
 										<td>${rBoardVo.hit}</td>
 										<td>${rBoardVo.regDate}</td>
 										<c:if test="${sessionScope.authUser.no == rBoardVo.userNo}">
-											<td><a
-												href="${pageContext.request.contextPath}/rboard/delete?no=${rBoardVo.no}">[삭제]</a></td>
+											<td><a href="${pageContext.request.contextPath}/rboard/delete?no=${rBoardVo.no}">[삭제]</a></td>
 										</c:if>
 									</tr>
 								</c:forEach>

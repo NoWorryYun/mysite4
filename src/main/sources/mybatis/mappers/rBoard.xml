@@ -140,8 +140,9 @@
 	<update id="depthcount" parameterType="RBoardVo">
 		<![CDATA[
 			update rboard
-			set depthcount = depthcount+1
-			where group_no = #{groupNo}
+			set depth = depth + 1
+			where title = #{title}
+			and group_no = #{groupNo}
 		]]>
 	</update>
 

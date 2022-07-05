@@ -25,6 +25,8 @@ public class RBoardController {
 		
 		List<RBoardVo> boardList = rBoardService.boardList();
 		
+		System.out.println(boardList);
+		
 		model.addAttribute("boardList", boardList);
 		
 		return "rboard/rList";

@@ -16,7 +16,9 @@ public class RBoardDao {
 	//게시판 불러오기
 	public List<RBoardVo> boardList(){
 		
-		return sqlsession.selectList("rBoard.boardList");
+		List<RBoardVo> boardList = sqlsession.selectList("rBoard.boardList");
+
+		return boardList;
 		
 	}
 
