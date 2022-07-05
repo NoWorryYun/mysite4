@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -125,5 +126,16 @@ public class BoardController {
 
 		return "board/list2";
 
+	}
+	
+	//리스트 일반 + 페이징 + 검색
+	@RequestMapping(value = "/list4", method = { RequestMethod.GET, RequestMethod.POST })
+	public String list4(Model model, @RequestParam(value = "crtPage", required = false, defaultValue = "1") int crtPage) {
+
+		Map<String, Object> pMap = boardService.getBoardList4(crtPage);
+
+		model.addAttribute("pMap", pMap);
+
+		return "board/list4";
 	}
 }

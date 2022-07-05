@@ -41,8 +41,8 @@
 		and b.no = #{no}
 		]]>
 	</select>
-	
-		<select id="search" parameterType="String" resultMap="resultMapBoardVo">
+
+	<select id="search" parameterType="String" resultMap="resultMapBoardVo">
 		<![CDATA[
 		select  b.no no,
 		        b.title title,
@@ -64,14 +64,14 @@
 			where no = #{no}
 		]]>
 	</delete>
-	
+
 	<insert id="write" parameterType="BoardVo">
 		 <![CDATA[
 		 	insert into board
 		 	values(seq_board_no.nextval, #{title}, #{content}, 0, sysdate, #{userNo})
 		 ]]>
 	</insert>
-	
+
 	<update id="hitcount" parameterType="int">
 		<![CDATA[
 			update board
@@ -79,7 +79,7 @@
 			where no = #{no}
 		]]>
 	</update>
-	
+
 	<update id="modify" parameterType="BoardVo">
 		<![CDATA[
 			update board
@@ -88,8 +88,8 @@
 			where no = #{no}
 		]]>
 	</update>
-	
-		<select id="boardList2" parameterType="String" resultMap="resultMapBoardVo">
+
+	<select id="boardList2" parameterType="String" resultMap="resultMapBoardVo">
 		<![CDATA[
 			select  b.no no,
 		        b.title title,
@@ -102,13 +102,56 @@
 		where b.user_no = u.no ]]>
 
 		<if test="value != ''">
-		and b.title like '%'||#{key}||'%'
+			and b.title like '%'||#{key}||'%'
 		</if>
 
 		<![CDATA[
 		order by b.no desc
 		]]>
 	</select>
+
+
+	<select id="boardList4" parameterType="map" resultMap="resultMapBoardVo">
+		<![CDATA[
+			select  ort.rn,
+			        ort.no,
+			        ort.title,
+			        ort.content,
+			        ort.hit,
+			        ort.regDate,
+			        ort.userNo,
+			        ort.name
+			from (  select  rownum rn,
+			                ot.no no,
+			                ot.title title,
+			                ot.content content,
+			                ot.hit hit,
+			                ot.regDate regDate,
+			                ot.userNo userNo,
+			                ot.name name
+			        from (select    b.no as no, 
+			                        b.title title, 
+			                        b.content content, 
+			                        b.hit hit, 
+			                        b.reg_date regDate, 
+			                        b.user_no userNo, 
+			                        u.name name 
+			              from board b, users u 
+			              where b.user_no = u.no
+			              order by b.no desc) ot  
+			      )ort
+			where rn>=#{startRnum}
+			and rn<=#{endRnum}
+		]]>
+	</select>
 	
+	<!-- 전체 글 갯수 -->	
+	<select id="selectTotalCnt" resultType="int">
+		<![CDATA[
+			select count(*) count
+			from board b, users u
+			where b.user_no = u.no
+		]]>
+	</select>
 </mapper>
 
